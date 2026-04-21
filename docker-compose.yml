@@ -4,9 +4,7 @@ services:
     build: .
     restart: unless-stopped
     volumes:
-      - ./data:/data
-    env_file:
-      - .env
+      - rss-bot-data:/data
     environment:
       - INTERVAL_MIN=30
       - BATCH_SIZE=50
@@ -16,8 +14,10 @@ services:
       - FRESHRSS_CATEGORY=Technology
       - BLACKLIST_SOURCES=smallbusiness,r/smallbusiness
       - STATS_HOUR=9
-      - DIGEST_HOUR=20       # дайджест топ-5 новостей в 20:00
+      - DIGEST_HOUR=20
       - DIGEST_COUNT=5
-      - KEEP_DAYS=30          # чистить старые записи через 30 дней
+      - KEEP_DAYS=30
       - DB_PATH=/data/news.db
 
+volumes:
+  rss-bot-data:
